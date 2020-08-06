@@ -2286,6 +2286,7 @@ def output_3d_photo(verts, colors, faces, Height, Width, hFov, vFov, tgt_poses, 
         for stereo in stereos:
             crop_stereos.append((stereo[atop:abuttom, aleft:aright, :3] * 1).astype(np.uint8))
             stereos = crop_stereos
+        stereos += stereos[::-1]
         clip = ImageSequenceClip(stereos, fps=config['fps'])
         if isinstance(video_basename, list):
             video_basename = video_basename[0]
